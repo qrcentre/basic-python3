@@ -1,0 +1,23 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.telegram.org]
+      User-Agent: [Python-urllib/3.5]
+    method: GET
+    uri: https://api.telegram.org/bot/getMe
+  response:
+    body: {string: '{"ok":true,"result":{"id":580733886,"is_bot":true,"first_name":"ningstestbot","username":"ningstestbot"}}'}
+    headers:
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['Content-Length,Content-Type,Date,Server,Connection']
+      Connection: [close]
+      Content-Length: ['105']
+      Content-Type: [application/json]
+      Date: ['Sat, 30 Jun 2018 15:37:34 GMT']
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000; includeSubdomains]
+    status: {code: 200, message: OK}
+version: 1

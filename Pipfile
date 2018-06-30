@@ -12,6 +12,7 @@ report = "coverage report"
 [dev-packages]
 pytest = "*"
 coveralls = "*"
+vcrpy = "*"
 
 [requires]
-python_version = "3.4"
+python_version = "3.5"

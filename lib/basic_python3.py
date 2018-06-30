@@ -60,7 +60,7 @@ WEATHER API
 def weather_get_now():
     """ GET the latest weather data
 
-    returns list<float>
+    returns list<float|int>
     """
     url = weather_url.format(param='datetime', time=strftime_now())
     resp = urllib.request.urlopen(url)

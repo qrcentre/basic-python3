@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Connection: [close]
+      Host: [api.telegram.org]
+      User-Agent: [Python-urllib/3.5]
+    method: GET
+    uri: https://api.telegram.org/bot/sendMessage?chat_id=&text=%60test_telegram_send%60&parse_mode=Markdown
+  response:
+    body: {string: '{"ok":true,"result":{"message_id":103,"from":{"id":580733886,"is_bot":true,"first_name":"ningstestbot","username":"ningstestbot"},"chat":{"id":000000000,"first_name":"ning
+        yuan","username":"00000000","type":"private"},"date":1530375903,"text":"test_telegram_send","entities":[{"offset":0,"length":18,"type":"code"}]}}'}
+    headers:
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['Content-Length,Content-Type,Date,Server,Connection']
+      Connection: [close]
+      Content-Length: ['317']
+      Content-Type: [application/json]
+      Date: ['Sat, 30 Jun 2018 16:25:03 GMT']
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000; includeSubdomains]
+    status: {code: 200, message: OK}
+version: 1
