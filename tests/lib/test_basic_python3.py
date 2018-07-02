@@ -41,6 +41,12 @@ def test_weather_get_now():
     assert temperatures != []
     assert are_nums
 
+def test_weather_get_rand():
+    temperatures = lib.basic_python3.weather_get_rand()
+    are_floats = all([ isinstance(x, float) for x in temperatures ])
+    assert temperatures != []
+    assert are_floats
+
 def test_strftime():
     time_string = '2016-01-10T13:30:33'
     time_tuple = time.strptime(time_string, '%Y-%m-%dT%H:%M:%S')

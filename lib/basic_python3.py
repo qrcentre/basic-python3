@@ -19,7 +19,7 @@ descriptions are:
 
 '''
 
-import json, time, urllib.parse, urllib.request
+import json, random, time, urllib.parse, urllib.request
 
 '''
 TELEGRAM API
@@ -69,6 +69,14 @@ def weather_get_now():
     readings = result['items'][0]['readings']
     temperatures = map(lambda x: x['value'], readings)
     return list(temperatures)
+
+def weather_get_rand():
+    """ Simulates a call to the function weather_get_now
+
+    In case NEA weather API fails on the actual day
+    returns list<float>
+    """
+    return [ random.randint(250, 300) / 10 for _ in range(random.randint(1, 10)) ]
 
 def strftime_now():
     """ Returns current time in the format specified by the weather api
