@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.data.gov.sg]
+      User-Agent: [Python-urllib/3.5]
+    method: GET
+    uri: https://api.data.gov.sg/v1/environment/air-temperature?datetime=2018-07-02T17:12:40
+  response:
+    body: {string: '{"metadata":{"stations":[{"id":"S109","device_id":"S109","name":"Ang
+        Mo Kio Avenue 5","location":{"latitude":1.3764,"longitude":103.8492}},{"id":"S117","device_id":"S117","name":"Banyan
+        Road","location":{"latitude":1.256,"longitude":103.679}},{"id":"S50","device_id":"S50","name":"Clementi
+        Road","location":{"latitude":1.3337,"longitude":103.7768}},{"id":"S107","device_id":"S107","name":"East
+        Coast Parkway","location":{"latitude":1.3135,"longitude":103.9625}},{"id":"S43","device_id":"S43","name":"Kim
+        Chuan Road","location":{"latitude":1.3399,"longitude":103.8878}},{"id":"S44","device_id":"S44","name":"Nanyang
+        Avenue","location":{"latitude":1.34583,"longitude":103.68166}},{"id":"S121","device_id":"S121","name":"Old
+        Choa Chu Kang Road","location":{"latitude":1.37288,"longitude":103.72244}},{"id":"S106","device_id":"S106","name":"Pulau
+        Ubin","location":{"latitude":1.4168,"longitude":103.9673}},{"id":"S111","device_id":"S111","name":"Scotts
+        Road","location":{"latitude":1.31055,"longitude":103.8365}},{"id":"S122","device_id":"S122","name":"Sembawang
+        Road","location":{"latitude":1.41731,"longitude":103.8249}},{"id":"S60","device_id":"S60","name":"Sentosa","location":{"latitude":1.25,"longitude":103.8279}},{"id":"S104","device_id":"S104","name":"Woodlands
+        Avenue 9","location":{"latitude":1.44387,"longitude":103.78538}},{"id":"S100","device_id":"S100","name":"Woodlands
+        Road","location":{"latitude":1.4172,"longitude":103.74855}}],"reading_type":"DBT
+        1M F","reading_unit":"deg C"},"items":[{"timestamp":"2018-07-03T01:10:00+08:00","readings":[{"station_id":"S109","value":27.4},{"station_id":"S117","value":27.7},{"station_id":"S50","value":27.1},{"station_id":"S107","value":28},{"station_id":"S43","value":28},{"station_id":"S44","value":27.1},{"station_id":"S121","value":26.2},{"station_id":"S106","value":26.4},{"station_id":"S111","value":27.1},{"station_id":"S122","value":25.9},{"station_id":"S60","value":27.5},{"station_id":"S104","value":26.9},{"station_id":"S100","value":26.3}]}],"api_info":{"status":"healthy"}}'}
+    headers:
+      Access-Control-Allow-Methods: ['GET,OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [4342bd123baaa9fc-SIN]
+      Connection: [close]
+      Content-Length: ['2037']
+      Content-Type: [application/json]
+      Date: ['Mon, 02 Jul 2018 17:12:40 GMT']
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d4a4d02e2023a0754071e43f712d5398b1530551560; expires=Tue,
+          02-Jul-19 17:12:40 GMT; path=/; domain=.data.gov.sg; HttpOnly']
+      Strict-Transport-Security: [max-age=0]
+      Via: [1.1 51c6cd29149b94c3e771bc52c7018dea.cloudfront.net (CloudFront)]
+      X-Amz-Cf-Id: [tJGyEDi1rTAgxDKqhtzNmLkE-i1Zfdk6bnFUJ4ig6IbTwyjMRncRyA==]
+      X-Amzn-Trace-Id: [Root=1-5b3a5d08-aed6e5600259a100831927a0]
+      X-Cache: [Miss from cloudfront]
+      X-Content-Type-Options: [nosniff]
+      x-amz-apigw-id: [JaN5RH6-yQ0FrnQ=]
+      x-amzn-RequestId: [2006bff3-7e1b-11e8-8fa0-53584411e54d]
+    status: {code: 200, message: OK}
+version: 1
