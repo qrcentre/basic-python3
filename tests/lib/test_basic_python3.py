@@ -4,7 +4,7 @@ import sys, os
 sys.path.append(os.getcwd())
 
 import re, time, vcr
-import config, lib.basic_python3
+import tests.mocks, lib.basic_python3
 
 def sanitise_telegram_url(request):
     request.uri = re.sub('(?<=telegram\.org/bot)[^/]*', '', request.uri)
@@ -18,7 +18,7 @@ vcr = vcr.VCR(
 
 @vcr.use_cassette(match_on=['host'])
 def test_telegram_get_me():
-    result_list = lib.basic_python3.telegram_whoami(config.TELEGRAM_KEY)
+    result_list = lib.basic_python3.telegram_whoami(tests.mocks.TELEGRAM_KEY)
     are_strings = all([ isinstance(x, str) for x in result_list ])
     are_non_empty = all([ len(x) > 0 for x in result_list ])
     assert isinstance(result_list, list)
@@ -28,7 +28,9 @@ def test_telegram_get_me():
 @vcr.use_cassette('tests/cassettes/test_telegram_send', match_on=['host'])
 def test_telegram_send():
     result = lib.basic_python3.telegram_send(
-        config.TELEGRAM_KEY, config.TELEGRAM_CHAT_ID, '`test_telegram_send`'
+        tests.mocks.TELEGRAM_KEY,
+        tests.mocks.TELEGRAM_CHAT_ID,
+        '`test_telegram_send`'
     )
     assert result
 
