@@ -40,3 +40,9 @@ if temp_avg > 27:
     print("It's pretty warm tonight")
 else:
     print("naise")
+
+# Bonus: make a telegram bot out of it
+
+telegram_key = 'T3L3GR4M_K3Y'
+telegram_chat_id = '0123456'
+telegram_send(telegram_key, telegram_chat_id, 'It is currently '+str(temp_avg))

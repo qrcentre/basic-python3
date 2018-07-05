@@ -8,15 +8,16 @@ import tests.mocks, lib.basic_python3
 
 def sanitise_telegram_url(request):
     request.uri = re.sub('(?<=telegram\.org/bot)[^/]*', '', request.uri)
-    request.uri = re.sub('(?<=\?chat_id=)\d+', '', request.uri)
     return request
 
 vcr = vcr.VCR(
     cassette_library_dir='tests/cassettes',
+    match_on=['host'],
+    filter_query_parameters=['chat_id'],
     before_record_request=sanitise_telegram_url
 )
 
-@vcr.use_cassette(match_on=['host'])
+@vcr.use_cassette()
 def test_telegram_get_me():
     result_list = lib.basic_python3.telegram_whoami(tests.mocks.TELEGRAM_KEY)
     are_strings = all([ isinstance(x, str) for x in result_list ])
@@ -25,7 +26,7 @@ def test_telegram_get_me():
     assert are_strings
     assert are_non_empty
 
-@vcr.use_cassette('tests/cassettes/test_telegram_send', match_on=['host'])
+@vcr.use_cassette()
 def test_telegram_send():
     result = lib.basic_python3.telegram_send(
         tests.mocks.TELEGRAM_KEY,
@@ -34,7 +35,7 @@ def test_telegram_send():
     )
     assert result
 
-@vcr.use_cassette(match_on=['host'])
+@vcr.use_cassette()
 def test_weather_get_now():
     temperatures = lib.basic_python3.weather_get_now()
     are_nums = all([
