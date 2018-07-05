@@ -5,7 +5,7 @@ python:
 install:
   - pip3 install pipenv
   - pipenv install --dev
-  - cp config.example.py config.py
+  - cp tests/mocks.example.py tests/mocks.py
 script:
   - pipenv run pytest
 after_success:

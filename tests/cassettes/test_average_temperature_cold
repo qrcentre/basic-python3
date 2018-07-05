@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.data.gov.sg]
+      User-Agent: [Python-urllib/3.5]
+    method: GET
+    uri: https://api.data.gov.sg/v1/environment/air-temperature?datetime=2018-07-05T12:30:15
+  response:
+    body: {string: '{"metadata":{"stations":[{"id":"S122","device_id":"S122","name":"Sembawang
+        Road","location":{"latitude":1.41731,"longitude":103.8249}},{"id":"S104","device_id":"S104","name":"Woodlands
+        Avenue 9","location":{"latitude":1.44387,"longitude":103.78538}}],"reading_type":"DBT
+        1M F","reading_unit":"deg C"},"items":[{"timestamp":"2018-07-05T20:20:00+08:00","readings":[{"station_id":"S122","value":28.5},{"station_id":"S104","value":24.6}]}],"api_info":{"status":"healthy"}}'}
+    headers:
+      Access-Control-Allow-Methods: ['GET,OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      CF-RAY: [4359d78098e5a9b4-SIN]
+      Connection: [close]
+      Content-Length: ['468']
+      Content-Type: [application/json]
+      Date: ['Thu, 05 Jul 2018 12:30:15 GMT']
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d636589ca1ea1e83e258da4d891898e2b1530793815; expires=Fri,
+          05-Jul-19 12:30:15 GMT; path=/; domain=.data.gov.sg; HttpOnly']
+      Strict-Transport-Security: [max-age=0]
+      Via: [1.1 05b2faa494b3a40ac7de7ced862f8a17.cloudfront.net (CloudFront)]
+      X-Amz-Cf-Id: [yuH4XKmtbMwkuRkv2m27-SObQAw-8V5HnMFEWTlEaJ_gtwUDfJ0A2Q==]
+      X-Amzn-Trace-Id: [Root=1-5b3e0f57-2479cd591a902d90ae501d8c]
+      X-Cache: [Miss from cloudfront]
+      X-Content-Type-Options: [nosniff]
+      x-amz-apigw-id: [JjdVnFo3yQ0FW4Q=]
+      x-amzn-RequestId: [2b4a9615-804f-11e8-b59c-c7c8d0dc1d80]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Connection: [close]
+      Host: [api.telegram.org]
+      User-Agent: [Python-urllib/3.5]
+    method: GET
+    uri: https://api.telegram.org/
+  response:
+    body: {string: ''}
+    headers:
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['Content-Length,Content-Type,Date,Server,Connection']
+      Connection: [close]
+      Content-Length: ['267']
+      Content-Type: [application/json]
+      Date: ['Thu, 05 Jul 2018 12:30:16 GMT']
+      Server: [nginx/1.12.2]
+      Strict-Transport-Security: [max-age=31536000; includeSubdomains]
+    status: {code: 200, message: OK}
+version: 1
