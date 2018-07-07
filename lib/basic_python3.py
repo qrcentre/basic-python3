@@ -114,7 +114,7 @@ def weather_get_now():
 
     """
 
-    url = weather_url.format(param='datetime', time=strftime_now())
+    url = weather_url.format(param='datetime', time=_strftime_now())
     resp = urllib.request.urlopen(url)
     body = resp.readline().decode()
     result = json.loads(body)
@@ -141,7 +141,7 @@ def weather_get_rand():
 
     return [ random.randint(250, 300) / 10 for _ in range(random.randint(1, 10)) ]
 
-def strftime_now():
+def _strftime_now():
     r"""Returns current time in the format specified by the NEA weather api
 
     Returns
@@ -151,9 +151,9 @@ def strftime_now():
 
     """
 
-    return strftime(time.localtime())
+    return _strftime(time.localtime())
 
-def strftime(time_tuple):
+def _strftime(time_tuple):
     r"""Returns given time tuple in the format specified by the NEA weather api
 
     Parameters
