@@ -1,12 +1,12 @@
 #! /usr/bin/env python3
 
-"""
-There's some weird workarounds here regarding importing modules in python3.
+"""There's some weird workarounds here regarding importing modules in python3.
 Modules are cached (cannot be imported twice), unless the importlib.reload
 function is used. I also test the stdout instead of return values, since that's
 what the average_temperature script gives us.
 
 The testing is snapshot-style.
+
 """
 
 import sys, os
