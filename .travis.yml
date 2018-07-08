@@ -9,6 +9,7 @@ install:
 script:
   - pipenv run pytest
   - pipenv run make html
+  - tests/is_docs_updated.sh
 after_success:
   - pipenv run cover
   - pipenv run coveralls
