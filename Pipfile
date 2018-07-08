@@ -13,6 +13,7 @@ report = "coverage report"
 pytest = "*"
 coveralls = "*"
 vcrpy = "*"
+sphinx = "*"
 
 [requires]
 python_version = "3.5"

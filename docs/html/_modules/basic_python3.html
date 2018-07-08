@@ -1,0 +1,378 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>basic_python3 &#8212; Basic Programs with Python3  documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for basic_python3</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env</span>
+
+<span class="sd">&quot;&quot;&quot;These are helper functions for the Basic Programs with Python3 workshop. The</span>
+<span class="sd">goal is to use only the standard library, to avoid complications of package</span>
+<span class="sd">installations.</span>
+
+<span class="sd">More information at http://github.com/ningyuansg/basic-python3</span>
+
+<span class="sd">All helper functions are defined in this one file for ease of import.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">urllib.parse</span><span class="o">,</span> <span class="nn">urllib.request</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">GENERAL</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="mean"><a class="viewcode-back" href="../index.html#basic_python3.mean">[docs]</a><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the mean of a sequence of int/floats</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    seq : list or iterable of int or floats</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        The arithmetic mean of the sequence</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If the parameter given is not an iterable, e.g. not a list</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If the sequence elements are not int or floats (i.e. not numbers)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span>
+        <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span>
+    <span class="p">]),</span> <span class="s1">&#39;The elements of the list must be a number&#39;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span></div>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">TELEGRAM API</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="n">telegram_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.telegram.org/bot</span><span class="si">{key}</span><span class="s1">/</span><span class="si">{method}</span><span class="s1">&#39;</span>
+
+<div class="viewcode-block" id="telegram_whoami"><a class="viewcode-back" href="../index.html#basic_python3.telegram_whoami">[docs]</a><span class="k">def</span> <span class="nf">telegram_whoami</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;GET telegram method getMe to retrieve the first_name and username.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key : string</span>
+<span class="sd">        Token for the telegram bot from @botfather.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of two elements, where the first element is the &#39;first_name&#39; of</span>
+<span class="sd">        the user, and the second is the username. Both are strings.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If the parameters are of the wrong type.</span>
+<span class="sd">    Exception</span>
+<span class="sd">        A relevant `urllib` exception may be raised.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type str&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">telegram_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;getMe&#39;</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="p">)[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]]</span></div>
+
+<div class="viewcode-block" id="telegram_send"><a class="viewcode-back" href="../index.html#basic_python3.telegram_send">[docs]</a><span class="k">def</span> <span class="nf">telegram_send</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;POST telegram method sendMessage to send a message.</span>
+
+<span class="sd">    parse_mode is set to telegram&#39;s Markdown: *bold*, _italics_, `inline code`</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key : string</span>
+<span class="sd">        Token for the telegram bot from @botfather.</span>
+<span class="sd">    chat_id : int</span>
+<span class="sd">        Telegram chat id to send this message to.</span>
+<span class="sd">    text : string</span>
+<span class="sd">        Content of the message to be sent, can be markdown.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bool</span>
+<span class="sd">        True, if successful.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If the parameters are of the wrong type.</span>
+<span class="sd">    Exception</span>
+<span class="sd">        A relevant `urllib` exception may be raised.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type str&#39;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">chat_id</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type int (number)&#39;</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type str&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">telegram_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sendMessage&#39;</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">?chat_id=</span><span class="si">{chat_id}</span><span class="s1">&amp;text=</span><span class="si">{text}</span><span class="s1">&amp;parse_mode=Markdown&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">base</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">chat_id</span><span class="o">=</span><span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span></div>
+
+<div class="viewcode-block" id="telegram_get_updates"><a class="viewcode-back" href="../index.html#basic_python3.telegram_get_updates">[docs]</a><span class="k">def</span> <span class="nf">telegram_get_updates</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get a stream of user ids of new telegram updates.</span>
+
+<span class="sd">    Only considers updates with a message key in it&#39;s JSON response.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    key : string</span>
+<span class="sd">        Token for the telegram bot from @botfather.</span>
+<span class="sd">    interval : int or float, optional</span>
+<span class="sd">        Interval, in seconds, between calls to the telegram getUpdates API.</span>
+<span class="sd">        Defaults to `5`.</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of unique user ids of new updates since the last yielded value.</span>
+<span class="sd">        Can be an empty list, if there are no new updates.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If the parameters are of the wrong type.</span>
+<span class="sd">    Exception</span>
+<span class="sd">        A relevant `urllib` exception may be raised.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &gt;&gt;&gt; for updates in telegram_get_updates(&#39;T3L3GR4M_K3Y&#39;):</span>
+<span class="sd">    ...    for user_id in updates:</span>
+<span class="sd">    ...        telegram_send_message(&#39;T3L3K3Y&#39;, user_id, &#39;Hi!&#39;)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type str&#39;</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+            <span class="n">next_offset</span><span class="p">,</span> <span class="n">user_ids</span> <span class="o">=</span> <span class="n">_get_updates</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="n">next_offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="p">))</span>
+            <span class="k">yield</span> <span class="n">user_ids</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">StopIteration</span></div>
+
+<span class="k">def</span> <span class="nf">_get_updates</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">telegram_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;getUpdates&#39;</span><span class="p">)</span>
+    <span class="n">scheme</span><span class="p">,</span> <span class="n">netloc</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="n">_make_query</span><span class="p">({</span>
+        <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+    <span class="p">})</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlunparse</span><span class="p">((</span><span class="n">scheme</span><span class="p">,</span> <span class="n">netloc</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_parse_resp</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_make_query</span><span class="p">(</span><span class="n">kv</span><span class="p">):</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kv</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
+    <span class="k">return</span> <span class="s1">&#39;&amp;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_parse_resp</span><span class="p">(</span><span class="n">resp</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Parses a urllib response</span>
+
+<span class="sd">    TODO: return a list of userids &#39;&#39;&#39;</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">l</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">body</span> <span class="p">])</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;ok&#39;</span><span class="p">]</span>
+    <span class="n">updates</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">_parse_updates</span><span class="p">(</span><span class="n">updates</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_parse_updates</span><span class="p">(</span><span class="n">updates</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Parses a dictionary representing a telegram update</span>
+
+<span class="sd">    Returns a two-element list.</span>
+
+<span class="sd">    The first element is an integer of the largest update_id, or 0 if</span>
+<span class="sd">    the updates list (after filtering only messages) is empty.</span>
+
+<span class="sd">    The second is a unique list of user ids, or an empty list if the updates</span>
+<span class="sd">    list (after filtering only messages) is empty &#39;&#39;&#39;</span>
+    <span class="n">updates</span> <span class="o">=</span> <span class="n">_filter_only_messages</span><span class="p">(</span><span class="n">updates</span><span class="p">)</span>
+
+    <span class="n">update_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">update</span><span class="p">:</span> <span class="n">update</span><span class="p">[</span><span class="s1">&#39;update_id&#39;</span><span class="p">],</span> <span class="n">updates</span><span class="p">))</span>
+    <span class="n">max_update_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">update_ids</span><span class="p">)</span> <span class="k">if</span> <span class="n">update_ids</span> <span class="o">!=</span> <span class="p">[]</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="n">user_ids</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">update</span><span class="p">:</span> <span class="n">update</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">][</span><span class="s1">&#39;from&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">updates</span><span class="p">)</span>
+    <span class="n">unique_user_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">user_ids</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">max_update_id</span><span class="p">,</span> <span class="n">unique_user_ids</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">_filter_only_messages</span><span class="p">(</span><span class="n">updates</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Can&#39;t get the allowed_updates option of telegram getUpdates to work,</span>
+<span class="sd">    so implementing a filter for just messages here.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">update</span><span class="p">:</span> <span class="s1">&#39;message&#39;</span> <span class="ow">in</span> <span class="n">update</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">updates</span><span class="p">))</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">WEATHER API</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">weather_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.data.gov.sg/v1/environment/air-temperature?</span><span class="si">{param}</span><span class="s1">=</span><span class="si">{time}</span><span class="s1">&#39;</span>
+
+<div class="viewcode-block" id="weather_get_now"><a class="viewcode-back" href="../index.html#basic_python3.weather_get_now">[docs]</a><span class="k">def</span> <span class="nf">weather_get_now</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;GET the latest weather data using the NEA weather API.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of readings (`int` or `float`) of the air temperature from</span>
+<span class="sd">        various weather stations across Singapore.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    Exception</span>
+<span class="sd">        A relevant `urllib` exception may be raised.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="n">weather_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">_strftime_now</span><span class="p">())</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="n">readings</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;readings&#39;</span><span class="p">]</span>
+    <span class="n">temperatures</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="n">readings</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="weather_get_rand"><a class="viewcode-back" href="../index.html#basic_python3.weather_get_rand">[docs]</a><span class="k">def</span> <span class="nf">weather_get_rand</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Simulates a call to the function `weather_get_now`.</span>
+
+<span class="sd">    In case the NEA weather API fails, this function provides a list of randomly</span>
+<span class="sd">    generated air temperature readings.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    list</span>
+<span class="sd">        A list of readings (`float`) of randomly generated air temperatures.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    weather_get_now</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="p">]</span></div>
+
+<span class="k">def</span> <span class="nf">_strftime_now</span><span class="p">():</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns current time in the format specified by the NEA weather api</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    string</span>
+<span class="sd">        Current date and time in the format YYYY-MM-DD[T]HH:mm:ss</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">_strftime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">_strftime</span><span class="p">(</span><span class="n">time_tuple</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns given time tuple in the format specified by the NEA weather api</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    time_tuple : tuple</span>
+<span class="sd">        A six element &#39;time tuple&#39;</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    time.strftime</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    ------</span>
+<span class="sd">    string</span>
+<span class="sd">        Current date and time in the format YYYY-MM-DD[T]HH:mm:ss</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">,</span> <span class="n">time_tuple</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, ning.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

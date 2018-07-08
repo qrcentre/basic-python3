@@ -6,17 +6,7 @@ installations.
 
 More information at http://github.com/ningyuansg/basic-python3
 
-All helper functions are defined in this one file for ease of import. To help
-you navigate this file, the functions are divided into categories, each with
-their own headers in a multiline comment. The headers (exact), and their
-descriptions are:
-
-    {HEADER NAME} - {DESCRIPTION}
-
-    GENERAL       - General helper functions
-    TELEGRAM API  - Functions which interact with the telegram API
-    WEATHER API   - Functions which interact with the NEA air-temperature API
-
+All helper functions are defined in this one file for ease of import.
 """
 
 import json, random, time, urllib.parse, urllib.request
@@ -164,23 +154,23 @@ def telegram_get_updates(key, interval=5):
     try:
         while True:
             time.sleep(interval)
-            next_offset, user_ids = get_updates(key, offset)
+            next_offset, user_ids = _get_updates(key, offset)
             offset = max((next_offset + 1, offset))
             yield user_ids
     except KeyboardInterrupt:
         raise StopIteration
 
-def get_updates(key, offset):
+def _get_updates(key, offset):
     url = telegram_url.format(key=key, method='getUpdates')
     scheme, netloc, path, _, _, _ = urllib.parse.urlparse(url)
-    query = make_query({
+    query = _make_query({
         'offset': str(offset)
     })
     url = urllib.parse.urlunparse((scheme, netloc, path, '', query, ''))
     resp = urllib.request.urlopen(url)
-    return parse_resp(resp)
+    return _parse_resp(resp)
 
-def make_query(kv):
+def _make_query(kv):
     pairs = []
     for k, v in kv.items():
         k = urllib.parse.quote(k)
@@ -188,7 +178,7 @@ def make_query(kv):
         pairs.append('{}={}'.format(k, v))
     return '&'.join(pairs)
 
-def parse_resp(resp):
+def _parse_resp(resp):
     ''' Parses a urllib response
 
     TODO: return a list of userids '''
@@ -197,9 +187,9 @@ def parse_resp(resp):
     body = json.loads(body)
     assert body['ok']
     updates = body['result']
-    return parse_updates(updates)
+    return _parse_updates(updates)
 
-def parse_updates(updates):
+def _parse_updates(updates):
     ''' Parses a dictionary representing a telegram update
 
     Returns a two-element list.
@@ -209,7 +199,7 @@ def parse_updates(updates):
 
     The second is a unique list of user ids, or an empty list if the updates
     list (after filtering only messages) is empty '''
-    updates = filter_only_messages(updates)
+    updates = _filter_only_messages(updates)
 
     update_ids = list(map(lambda update: update['update_id'], updates))
     max_update_id = max(update_ids) if update_ids != [] else 0
@@ -219,7 +209,7 @@ def parse_updates(updates):
 
     return [max_update_id, unique_user_ids]
 
-def filter_only_messages(updates):
+def _filter_only_messages(updates):
     ''' Can't get the allowed_updates option of telegram getUpdates to work,
     so implementing a filter for just messages here.'''
     return list(filter(lambda update: 'message' in update.keys(), updates))

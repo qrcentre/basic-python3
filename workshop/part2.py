@@ -5,6 +5,7 @@ from basic_python3 import *
 temp_list = weather_get_now()
 
 # Just like in part 1, we need a variable to store the sum of temperatures.
+
 temp_sum = 0
 
 # In order to sum everything up, we need to visit the temperatures in the list
