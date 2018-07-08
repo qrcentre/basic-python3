@@ -11,6 +11,9 @@ Part 1
 
 Part 2
 ------
+
+You can download the helper library :download:`here <../../lib/basic_python3.py>`.
+
 .. literalinclude:: part2.py
     :language: python
     :linenos:

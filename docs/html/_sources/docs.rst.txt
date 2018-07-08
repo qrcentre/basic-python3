@@ -1,5 +1,8 @@
-Docs
-====
+Helper Library Docs
+===================
+
+You can download the helper library :download:`here <../lib/basic_python3.py>`.
+
 .. automodule:: basic_python3
 
 NEA Weather API

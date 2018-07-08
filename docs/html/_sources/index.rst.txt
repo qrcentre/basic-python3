@@ -15,3 +15,4 @@ This is a work in progress.
    introduction
    workshop/reference
    docs
+   Slides <_static/slides.html#://>
