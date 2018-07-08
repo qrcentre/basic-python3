@@ -1,0 +1,409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Workshop Reference &mdash; Basic Programs with Python3  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Docs" href="../docs.html" />
+    <link rel="prev" title="Introduction" href="../introduction.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Basic Programs with Python3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workshop Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#part-1">Part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-2">Part 2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-3">Part 3</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../docs.html">Docs</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Basic Programs with Python3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Workshop Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/workshop/reference.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="workshop-reference">
+<h1>Workshop Reference<a class="headerlink" href="#workshop-reference" title="Permalink to this headline">¶</a></h1>
+<p>These are reference notes for the workshop.</p>
+<div class="section" id="part-1">
+<h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># First, store our temperature readings in variables.</span>
+
+<span class="n">temp1</span> <span class="o">=</span> <span class="mf">27.3</span>
+<span class="n">temp2</span> <span class="o">=</span> <span class="mf">25.9</span>
+<span class="n">temp3</span> <span class="o">=</span> <span class="mi">28</span>
+<span class="n">temp4</span> <span class="o">=</span> <span class="mf">26.5</span>
+
+<span class="c1"># Next, apply the formula for the average of a set:</span>
+<span class="c1">#</span>
+<span class="c1">#   avg = (sum of everything) / (number of things)</span>
+<span class="c1">#</span>
+<span class="c1"># Keep in mind that we need a _variable_ to keep store the sum of temperatures.</span>
+
+<span class="n">temp_sum</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Now, add the values of each temperature reading into the temp_sum variable</span>
+<span class="c1"># Recall that the `=` sign does not mean mathematically equal. It is just a</span>
+<span class="c1"># shortform notation for assignment.</span>
+
+<span class="n">temp_sum</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">+</span> <span class="n">temp1</span>
+<span class="n">temp_sum</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">+</span> <span class="n">temp2</span>
+<span class="n">temp_sum</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">+</span> <span class="n">temp3</span>
+<span class="n">temp_sum</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">+</span> <span class="n">temp4</span>
+
+<span class="c1"># Finally, apply the formula for the average.</span>
+
+<span class="n">temp_sample_size</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">temp_avg</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">/</span> <span class="n">temp_sample_size</span>
+
+<span class="c1"># And get python to show it to us by _printing_ it onto the screen.</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">temp_avg</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="part-2">
+<h2>Part 2<a class="headerlink" href="#part-2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">basic_python3</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># First, let&#39;s get a _list_ of current temperature readings across singapore.</span>
+
+<span class="n">temp_list</span> <span class="o">=</span> <span class="n">weather_get_now</span><span class="p">()</span>
+
+<span class="c1"># Just like in part 1, we need a variable to store the sum of temperatures.</span>
+
+<span class="n">temp_sum</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># In order to sum everything up, we need to visit the temperatures in the list</span>
+<span class="c1"># of temperatures _one by one_---that is, we must iterate through it.</span>
+
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">temp_list</span><span class="p">:</span>
+    <span class="n">temp_sum</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">+</span> <span class="n">x</span>
+
+<span class="c1"># Now, we find the number of things with the special _method_ `len`.</span>
+
+<span class="n">temp_sample_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_list</span><span class="p">)</span>
+<span class="n">temp_avg</span> <span class="o">=</span> <span class="n">temp_sum</span> <span class="o">/</span> <span class="n">temp_sample_size</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">temp_avg</span><span class="p">)</span>
+
+<span class="c1"># Is it hot or is it cold?.</span>
+
+<span class="k">if</span> <span class="n">temp_avg</span> <span class="o">&gt;</span> <span class="mi">27</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;It&#39;s pretty warm tonight&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;naise&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="part-3">
+<h2>Part 3<a class="headerlink" href="#part-3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">basic_python3</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># In order to access our telegram bot, we need it&#39;s token (a.k.a. key). In order</span>
+<span class="c1"># for our telegram bot to send messages to us, it needs to know our user id.</span>
+
+<span class="n">telegram_key</span><span class="o">=</span> <span class="s1">&#39;T3L3GR4M_K3Y&#39;</span>
+<span class="n">telegram_chat_id</span> <span class="o">=</span> <span class="mi">1234567</span>
+
+<span class="c1"># Let&#39;s get the bot to tell us our script has just started up.</span>
+
+<span class="n">telegram_send</span><span class="p">(</span><span class="n">telegram_key</span><span class="p">,</span> <span class="n">telegram_chat_id</span><span class="p">,</span> <span class="s1">&#39;Everything is going extremely well&#39;</span><span class="p">)</span>
+
+<span class="c1"># Then, we iterate through the updates to our telegram bot.</span>
+
+<span class="k">for</span> <span class="n">updates</span> <span class="ow">in</span> <span class="n">telegram_get_updates</span><span class="p">(</span><span class="n">telegram_key</span><span class="p">):</span>
+    <span class="c1"># Noting that updates is a list of user_ids that can be empty, we need to</span>
+    <span class="c1"># iterate through updates, sending a message to each user_id.</span>
+    <span class="k">for</span> <span class="n">user_id</span> <span class="ow">in</span> <span class="n">updates</span><span class="p">:</span>
+        <span class="n">temp_list</span> <span class="o">=</span> <span class="n">weather_get_now</span><span class="p">()</span>
+        <span class="n">temp_avg</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">temp_list</span><span class="p">)</span>
+        <span class="n">telegram_send</span><span class="p">(</span>
+            <span class="n">telegram_key</span><span class="p">,</span>
+            <span class="n">telegram_chat_id</span><span class="p">,</span>
+            <span class="s1">&#39;It is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">temp_avg</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; C tonight&#39;</span>
+        <span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../docs.html" class="btn btn-neutral float-right" title="Docs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../introduction.html" class="btn btn-neutral" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
