@@ -13,6 +13,7 @@ descriptions are:
 
     {HEADER NAME} - {DESCRIPTION}
 
+    GENERAL       - General helper functions
     TELEGRAM API  - Functions which interact with the telegram API
     WEATHER API   - Functions which interact with the NEA air-temperature API
 
@@ -21,11 +22,40 @@ descriptions are:
 import json, random, time, urllib.parse, urllib.request
 
 '''
+GENERAL
+'''
+
+def mean(seq):
+    r"""Calculate the mean of a sequence of int/floats
+
+    Parameters
+    ----------
+    seq : list or iterable of int or floats
+
+    Returns
+    -------
+    float
+        The arithmetic mean of the sequence
+
+    Raises
+    ------
+    TypeError
+        If the parameter given is not an iterable, e.g. not a list
+    AssertionError
+        If the sequence elements are not int or floats (i.e. not numbers)
+
+    """
+
+    assert all([
+        isinstance(x, int) or isinstance(x, float) for x in seq
+    ]), 'The elements of the list must be a number'
+    return sum(seq) / len(seq)
+
+'''
 TELEGRAM API
 '''
 
 telegram_url = 'https://api.telegram.org/bot{key}/{method}'
-weather_url = 'https://api.data.gov.sg/v1/environment/air-temperature?{param}={time}'
 
 def telegram_whoami(key):
     r"""GET telegram method getMe to retrieve the first_name and username.
@@ -197,6 +227,8 @@ def filter_only_messages(updates):
 """
 WEATHER API
 """
+
+weather_url = 'https://api.data.gov.sg/v1/environment/air-temperature?{param}={time}'
 
 def weather_get_now():
     r"""GET the latest weather data using the NEA weather API.
