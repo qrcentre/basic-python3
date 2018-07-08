@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = BasicProgramswithPython3
-SOURCEDIR     = .
+SOURCEDIR     = sphinx
 BUILDDIR      = docs
 
 # Put it first so that "make" without argument is like "make help".

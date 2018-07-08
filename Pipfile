@@ -14,6 +14,7 @@ pytest = "*"
 coveralls = "*"
 vcrpy = "*"
 sphinx = "*"
+sphinx-rtd-theme = "*"
 
 [requires]
 python_version = "3.5"

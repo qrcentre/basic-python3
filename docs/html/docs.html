@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Docs &mdash; Basic Programs with Python3  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Workshop Reference" href="workshop/reference.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Basic Programs with Python3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="workshop/reference.html">Workshop Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Docs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nea-weather-api">NEA Weather API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#telegram-bot-api">Telegram Bot API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#miscellaneous-functions">Miscellaneous Functions</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Basic Programs with Python3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Docs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/docs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-basic_python3">
+<span id="docs"></span><h1>Docs<a class="headerlink" href="#module-basic_python3" title="Permalink to this headline">¶</a></h1>
+<p>These are helper functions for the Basic Programs with Python3 workshop. The
+goal is to use only the standard library, to avoid complications of package
+installations.</p>
+<p>More information at <a class="reference external" href="http://github.com/ningyuansg/basic-python3">http://github.com/ningyuansg/basic-python3</a></p>
+<p>All helper functions are defined in this one file for ease of import.</p>
+<div class="section" id="nea-weather-api">
+<h2>NEA Weather API<a class="headerlink" href="#nea-weather-api" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="basic_python3.weather_get_now">
+<code class="descclassname">basic_python3.</code><code class="descname">weather_get_now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/basic_python3.html#weather_get_now"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#basic_python3.weather_get_now" title="Permalink to this definition">¶</a></dt>
+<dd><p>GET the latest weather data using the NEA weather API.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of readings (<cite>int</cite> or <cite>float</cite>) of the air temperature from
+various weather stations across Singapore.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code> – A relevant <cite>urllib</cite> exception may be raised.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basic_python3.weather_get_rand">
+<code class="descclassname">basic_python3.</code><code class="descname">weather_get_rand</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/basic_python3.html#weather_get_rand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#basic_python3.weather_get_rand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates a call to the function <cite>weather_get_now</cite>.</p>
+<p>In case the NEA weather API fails, this function provides a list of randomly
+generated air temperature readings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A list of readings (<cite>float</cite>) of randomly generated air temperatures.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#basic_python3.weather_get_now" title="basic_python3.weather_get_now"><code class="xref py py-func docutils literal notranslate"><span class="pre">weather_get_now()</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="telegram-bot-api">
+<h2>Telegram Bot API<a class="headerlink" href="#telegram-bot-api" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="basic_python3.telegram_whoami">
+<code class="descclassname">basic_python3.</code><code class="descname">telegram_whoami</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/basic_python3.html#telegram_whoami"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#basic_python3.telegram_whoami" title="Permalink to this definition">¶</a></dt>
+<dd><p>GET telegram method getMe to retrieve the first_name and username.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> (<em>string</em>) – Token for the telegram bot from &#64;botfather.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A list of two elements, where the first element is the ‘first_name’ of
+the user, and the second is the username. Both are strings.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AssertionError</span></code> – If the parameters are of the wrong type.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code> – A relevant <cite>urllib</cite> exception may be raised.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basic_python3.telegram_send">
+<code class="descclassname">basic_python3.</code><code class="descname">telegram_send</code><span class="sig-paren">(</span><em>key</em>, <em>chat_id</em>, <em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/basic_python3.html#telegram_send"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#basic_python3.telegram_send" title="Permalink to this definition">¶</a></dt>
+<dd><p>POST telegram method sendMessage to send a message.</p>
+<p>parse_mode is set to telegram’s Markdown: <em>bold</em>, _italics_, <cite>inline code</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>string</em>) – Token for the telegram bot from &#64;botfather.</li>
+<li><strong>chat_id</strong> (<em>int</em>) – Telegram chat id to send this message to.</li>
+<li><strong>text</strong> (<em>string</em>) – Content of the message to be sent, can be markdown.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True, if successful.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bool</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AssertionError</span></code> – If the parameters are of the wrong type.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code> – A relevant <cite>urllib</cite> exception may be raised.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="basic_python3.telegram_get_updates">
+<code class="descclassname">basic_python3.</code><code class="descname">telegram_get_updates</code><span class="sig-paren">(</span><em>key</em>, <em>interval=5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/basic_python3.html#telegram_get_updates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#basic_python3.telegram_get_updates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a stream of user ids of new telegram updates.</p>
+<p>Only considers updates with a message key in it’s JSON response.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>string</em>) – Token for the telegram bot from &#64;botfather.</li>
+<li><strong>interval</strong> (<em>int</em><em> or </em><em>float</em><em>, </em><em>optional</em>) – Interval, in seconds, between calls to the telegram getUpdates API.
+Defaults to <cite>5</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first"><em>list</em> – A list of unique user ids of new updates since the last yielded value.
+Can be an empty list, if there are no new updates.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AssertionError</span></code> – If the parameters are of the wrong type.</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">Exception</span></code> – A relevant <cite>urllib</cite> exception may be raised.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">updates</span> <span class="ow">in</span> <span class="n">telegram_get_updates</span><span class="p">(</span><span class="s1">&#39;T3L3GR4M_K3Y&#39;</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">for</span> <span class="n">user_id</span> <span class="ow">in</span> <span class="n">updates</span><span class="p">:</span>
+<span class="gp">... </span>       <span class="n">telegram_send_message</span><span class="p">(</span><span class="s1">&#39;T3L3K3Y&#39;</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;Hi!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="miscellaneous-functions">
+<h2>Miscellaneous Functions<a class="headerlink" href="#miscellaneous-functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="basic_python3.mean">
+<code class="descclassname">basic_python3.</code><code class="descname">mean</code><span class="sig-paren">(</span><em>seq</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/basic_python3.html#mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#basic_python3.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the mean of a sequence of int/floats</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>seq</strong> (<em>list</em><em> or </em><em>iterable of int</em><em> or </em><em>floats</em>) – </p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The arithmetic mean of the sequence</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">float</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">TypeError</span></code> – If the parameter given is not an iterable, e.g. not a list</li>
+<li><code class="xref py py-exc docutils literal notranslate"><span class="pre">AssertionError</span></code> – If the sequence elements are not int or floats (i.e. not numbers)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="workshop/reference.html" class="btn btn-neutral" title="Workshop Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, ning.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
