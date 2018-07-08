@@ -94,6 +94,106 @@ def telegram_send(key, chat_id, text):
     )
     return urllib.request.urlopen(url).status == 200
 
+def telegram_get_updates(key, interval=5):
+    """Get a stream of user ids of new telegram updates.
+
+    Only considers updates with a message key in it's JSON response.
+
+    Parameters
+    ----------
+    key : string
+        Token for the telegram bot from @botfather.
+    interval : int or float, optional
+        Interval, in seconds, between calls to the telegram getUpdates API.
+        Defaults to `5`.
+
+    Yields
+    -------
+    list
+        A list of unique user ids of new updates since the last yielded value.
+        Can be an empty list, if there are no new updates.
+
+    Raises
+    ------
+    AssertionError
+        If the parameters are of the wrong type.
+    Exception
+        A relevant `urllib` exception may be raised.
+
+    Examples
+    --------
+
+    >>> for updates in telegram_get_updates('T3L3GR4M_K3Y'):
+    ...    for user_id in updates:
+    ...        telegram_send_message('T3L3K3Y', user_id, 'Hi!')
+
+    """
+
+    assert type(key) == str, 'The argument must be of type str'
+    offset = 0
+    try:
+        while True:
+            time.sleep(interval)
+            next_offset, user_ids = get_updates(key, offset)
+            offset = max((next_offset + 1, offset))
+            yield user_ids
+    except KeyboardInterrupt:
+        raise StopIteration
+
+def get_updates(key, offset):
+    url = telegram_url.format(key=key, method='getUpdates')
+    scheme, netloc, path, _, _, _ = urllib.parse.urlparse(url)
+    query = make_query({
+        'offset': str(offset)
+    })
+    url = urllib.parse.urlunparse((scheme, netloc, path, '', query, ''))
+    resp = urllib.request.urlopen(url)
+    return parse_resp(resp)
+
+def make_query(kv):
+    pairs = []
+    for k, v in kv.items():
+        k = urllib.parse.quote(k)
+        v = urllib.parse.quote(v)
+        pairs.append('{}={}'.format(k, v))
+    return '&'.join(pairs)
+
+def parse_resp(resp):
+    ''' Parses a urllib response
+
+    TODO: return a list of userids '''
+    body = resp.readlines()
+    body = ''.join([ l.decode() for l in body ])
+    body = json.loads(body)
+    assert body['ok']
+    updates = body['result']
+    return parse_updates(updates)
+
+def parse_updates(updates):
+    ''' Parses a dictionary representing a telegram update
+
+    Returns a two-element list.
+
+    The first element is an integer of the largest update_id, or 0 if
+    the updates list (after filtering only messages) is empty.
+
+    The second is a unique list of user ids, or an empty list if the updates
+    list (after filtering only messages) is empty '''
+    updates = filter_only_messages(updates)
+
+    update_ids = list(map(lambda update: update['update_id'], updates))
+    max_update_id = max(update_ids) if update_ids != [] else 0
+
+    user_ids = map(lambda update: update['message']['from']['id'], updates)
+    unique_user_ids = list(set(user_ids))
+
+    return [max_update_id, unique_user_ids]
+
+def filter_only_messages(updates):
+    ''' Can't get the allowed_updates option of telegram getUpdates to work,
+    so implementing a filter for just messages here.'''
+    return list(filter(lambda update: 'message' in update.keys(), updates))
+
 """
 WEATHER API
 """
