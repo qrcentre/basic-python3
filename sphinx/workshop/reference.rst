@@ -43,15 +43,14 @@ For loops enable us to loop over the elements in a list or string.
     >>> lst = [1,2,3,4]
     >>> x = 0
     >>> for i in lst:
-    	x += i
+    	x = x + i
     >>> x
     10
-    >>> string = "hello"
-    >>> newstring = ""
-    >>> for char in string:
-        newstring = char + newstring
-    >>> newstring
-    'olleh'
+    >>> newlist = []
+    >>> for i in lst:
+        newlist = [i] + newlist
+    >>> newlist
+    [4,3,2,1]
 
 Conditionals (if, elif, else)
 ^^^^^^^^^^^^^^^^^^^^^
