@@ -13,6 +13,6 @@ This is a work in progress.
    :caption: Contents:
 
    introduction
-   workshop/reference
+   reference/index
    docs
    Slides <_static/slides.html#://>
