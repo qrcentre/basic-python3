@@ -82,7 +82,15 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Workshop Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#part-1">Part 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-1">Part 1</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#numbers">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#strings">Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#syntax">Syntax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#editor">Editor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#checkpoint">Checkpoint</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#part-2">Part 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#part-3">Part 3</a></li>
 </ul>
@@ -158,6 +166,139 @@
 <p>These are reference notes for the workshop.</p>
 <div class="section" id="part-1">
 <h2>Part 1<a class="headerlink" href="#part-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="numbers">
+<h3>Numbers<a class="headerlink" href="#numbers" title="Permalink to this headline">¶</a></h3>
+<p>Numbers in python work in the same way as in any calculator. The order of
+operations apply.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">27.3</span> <span class="o">+</span> <span class="mf">25.9</span> <span class="o">+</span> <span class="mi">28</span> <span class="o">+</span> <span class="mf">26.5</span><span class="p">)</span>
+<span class="go">26.925</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mf">27.3</span><span class="o">-</span><span class="mf">26.925</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">0.140625</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mf">25.9</span><span class="o">-</span><span class="mf">26.925</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">1.0506250000000044</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">28</span> <span class="o">-</span> <span class="mf">26.925</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">1.1556249999999986</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mf">26.5</span><span class="o">-</span><span class="mf">26.925</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="go">0.1806250000000006</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.141</span> <span class="o">+</span> <span class="mf">1.051</span> <span class="o">+</span> <span class="mf">1.156</span> <span class="o">+</span> <span class="mf">0.181</span><span class="p">)</span>
+<span class="go">0.843</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="strings">
+<h3>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h3>
+<p>Strings are a sequence of characters. You can add them together end-to-end.
+Strings are <em>not</em> compatible with numbers!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;Hello &#39;</span> <span class="o">+</span> <span class="s1">&#39;world!&#39;</span>
+<span class="go">&#39;Hello world!&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s2">&quot;Hello &quot;</span> <span class="o">+</span> <span class="s2">&quot;world!&quot;</span>
+<span class="go">&#39;Hello world!&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;Hello &#39;</span> <span class="o">+</span> <span class="mi">80416</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">TypeError</span>: <span class="n">Can&#39;t convert &#39;int&#39; object to str implicitly</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>Variables are a way to store <em>values</em>, for example numbers and strings. We
+<em>assign</em> a value to a variable with the symbol <code class="docutils literal notranslate"><span class="pre">=</span></code>, where the name of our new
+variable is on the left, and the value it will hold is on the right.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jelly</span> <span class="o">=</span> <span class="mi">52</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beans</span> <span class="o">=</span> <span class="s1">&#39;48&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">jelly</span>
+<span class="go">52</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beans</span>
+<span class="go">&#39;48&#39;</span>
+</pre></div>
+</div>
+<p>You must assign a value to a variable before you use it! Otherwise, you will get
+an error.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">jellybeans</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;jellybeans&#39; is not defined</span>
+</pre></div>
+</div>
+<p>Once <em>defined</em>, we can use these variables in place of our values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">temp1</span> <span class="o">=</span> <span class="mf">30.7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">temp2</span> <span class="o">=</span> <span class="mf">29.7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">average_temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp1</span> <span class="o">+</span> <span class="n">temp2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">average_temp</span>
+<span class="go">30.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word1</span> <span class="o">=</span> <span class="s1">&#39;Hi, &#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word1</span> <span class="o">+</span> <span class="s1">&#39;there!&#39;</span>
+<span class="go">&#39;Hi, there!&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h3>
+<p>How does python know whether you are typing in a number, a string, or a
+variable? Python, and other programming languages in general, infer this from
+the way that you type them out—it assumes that you follow some rules, which
+are the <em>syntax</em> of the langauge.</p>
+<dl class="docutils">
+<dt>Numbers</dt>
+<dd>Starts with a digit (excluding zero, <code class="docutils literal notranslate"><span class="pre">0</span></code>) or a period (<code class="docutils literal notranslate"><span class="pre">.</span></code>).</dd>
+<dt>Strings</dt>
+<dd>Starts and end with single or triple quotation marks (<code class="docutils literal notranslate"><span class="pre">'</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">'''</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;</span></code>). The starting and ending type of quotation mark must be the same.</dd>
+<dt>Variable</dt>
+<dd>Starts with an alphabet, or an underscore. Thereafter, can include
+alphanumeric characters and underscores.</dd>
+</dl>
+<p>Here are some examples,</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="37%" />
+<col width="37%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Number</th>
+<th class="head">String</th>
+<th class="head">Variable</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2345</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">'juice'</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">x</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">10</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">&quot;jam&quot;</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">Yellow</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">0.92810</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">'''jerky'''</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">fried_banana</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">3.45</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;jekyll&quot;&quot;&quot;</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">OwO</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="editor">
+<h3>Editor<a class="headerlink" href="#editor" title="Permalink to this headline">¶</a></h3>
+<p>The editor is a place that allows you to save the programs you have written.
+Hereafter, programs in an editor are shown with line numbers, like so,</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;This represents a program in the editor&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>While the REPL is represented with no line numbers, and with the default prompt
+<code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;This is in the REPL&#39;</span><span class="p">)</span>
+<span class="go">This is in the REPL</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checkpoint">
+<h3>Checkpoint<a class="headerlink" href="#checkpoint" title="Permalink to this headline">¶</a></h3>
+<p>By now, your program should look something like this:</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -223,6 +364,7 @@
 <span class="k">print</span><span class="p">(</span><span class="n">temp_avg</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 </div>
 <div class="section" id="part-2">
 <h2>Part 2<a class="headerlink" href="#part-2" title="Permalink to this headline">¶</a></h2>
