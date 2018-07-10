@@ -25,7 +25,5 @@ print(temp_avg)
 
 if temp_avg > 30:
     print("It's pretty warm tonight")
-elif temp_avg > 26:
-    print("The temperature is average")
 else:
     print("naise")
