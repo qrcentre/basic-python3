@@ -9,7 +9,9 @@ More information at http://github.com/ningyuansg/basic-python3
 All helper functions are defined in this one file for ease of import.
 """
 
-import json, random, time, urllib.parse, urllib.request
+import json, logging, random, time, urllib.parse, urllib.request
+
+logger = logging.getLogger('basic_python3')
 
 '''
 GENERAL
@@ -40,6 +42,11 @@ def mean(seq):
         isinstance(x, int) or isinstance(x, float) for x in seq
     ]), 'The elements of the list must be a number'
     return sum(seq) / len(seq)
+
+def _urlopen(url):
+    logger.info('Sending request to {}'.format(url))
+    return urllib.request.urlopen(url)
+
 
 '''
 TELEGRAM API
@@ -72,7 +79,7 @@ def telegram_whoami(key):
 
     assert type(key) == str, 'The argument must be of type str'
     url = telegram_url.format(key=key, method='getMe')
-    resp = urllib.request.urlopen(url)
+    resp = _urlopen(url)
     body = resp.readline().decode()
     result = json.loads(body)['result']
     return [result['first_name'], result['username']]
@@ -112,7 +119,7 @@ def telegram_send(key, chat_id, text):
     url = '{base}?chat_id={chat_id}&text={text}&parse_mode=Markdown'.format(
         base=url, chat_id=chat_id, text=urllib.parse.quote(text)
     )
-    return urllib.request.urlopen(url).status == 200
+    return _urlopen(url).status == 200
 
 def telegram_get_updates(key, interval=5):
     """Get a stream of user ids of new telegram updates.
@@ -167,7 +174,7 @@ def _get_updates(key, offset):
         'offset': str(offset)
     })
     url = urllib.parse.urlunparse((scheme, netloc, path, '', query, ''))
-    resp = urllib.request.urlopen(url)
+    resp = _urlopen(url)
     return _parse_resp(resp)
 
 def _make_query(kv):
@@ -237,7 +244,7 @@ def weather_get_now():
     """
 
     url = weather_url.format(param='datetime', time=_strftime_now())
-    resp = urllib.request.urlopen(url)
+    resp = _urlopen(url)
     body = resp.readline().decode()
     result = json.loads(body)
     readings = result['items'][0]['readings']
