@@ -4,9 +4,15 @@
 goal is to use only the standard library, to avoid complications of package
 installations.
 
-More information at http://github.com/ningyuansg/basic-python3
+To enable debug messages for HTTP requests, add the following lines to the top
+of your program, then call any of the NEA or Telegram API functions.
 
-All helper functions are defined in this one file for ease of import.
+.. code-block:: python
+    :linenos:
+
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+
 """
 
 import copy, json, logging, random, time, urllib.parse, urllib.request

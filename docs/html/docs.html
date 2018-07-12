@@ -158,8 +158,13 @@
 <span class="target" id="module-basic_python3"></span><p>These are helper functions for the Basic Programs with Python3 workshop. The
 goal is to use only the standard library, to avoid complications of package
 installations.</p>
-<p>More information at <a class="reference external" href="http://github.com/ningyuansg/basic-python3">http://github.com/ningyuansg/basic-python3</a></p>
-<p>All helper functions are defined in this one file for ease of import.</p>
+<p>To enable debug messages for HTTP requests, add the following lines to the top
+of your program, then call any of the NEA or Telegram API functions.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
 <div class="section" id="nea-weather-api">
 <h2>NEA Weather API<a class="headerlink" href="#nea-weather-api" title="Permalink to this headline">¶</a></h2>
 <dl class="function">

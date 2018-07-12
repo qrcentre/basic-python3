@@ -151,12 +151,20 @@
 <span class="sd">goal is to use only the standard library, to avoid complications of package</span>
 <span class="sd">installations.</span>
 
-<span class="sd">More information at http://github.com/ningyuansg/basic-python3</span>
+<span class="sd">To enable debug messages for HTTP requests, add the following lines to the top</span>
+<span class="sd">of your program, then call any of the NEA or Telegram API functions.</span>
 
-<span class="sd">All helper functions are defined in this one file for ease of import.</span>
+<span class="sd">.. code-block:: python</span>
+<span class="sd">    :linenos:</span>
+
+<span class="sd">    import logging</span>
+<span class="sd">    logging.basicConfig(level=logging.DEBUG)</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">urllib.parse</span><span class="o">,</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">copy</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">logging</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">urllib.parse</span><span class="o">,</span> <span class="nn">urllib.request</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;basic_python3&#39;</span><span class="p">)</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">GENERAL</span>
@@ -187,6 +195,13 @@
         <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span>
     <span class="p">]),</span> <span class="s1">&#39;The elements of the list must be a number&#39;</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Sending request to </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Received response: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">body</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">}</span>
 
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">TELEGRAM API</span>
@@ -219,9 +234,8 @@
 
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type str&#39;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">telegram_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;getMe&#39;</span><span class="p">)</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="p">)[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]]</span></div>
 
 <div class="viewcode-block" id="telegram_send"><a class="viewcode-back" href="../docs.html#basic_python3.telegram_send">[docs]</a><span class="k">def</span> <span class="nf">telegram_send</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
@@ -259,7 +273,7 @@
     <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">?chat_id=</span><span class="si">{chat_id}</span><span class="s1">&amp;text=</span><span class="si">{text}</span><span class="s1">&amp;parse_mode=Markdown&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">base</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">chat_id</span><span class="o">=</span><span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="mi">200</span></div>
+    <span class="k">return</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">200</span></div>
 
 <div class="viewcode-block" id="telegram_get_updates"><a class="viewcode-back" href="../docs.html#basic_python3.telegram_get_updates">[docs]</a><span class="k">def</span> <span class="nf">telegram_get_updates</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get a stream of user ids of new telegram updates.</span>
@@ -302,7 +316,7 @@
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
             <span class="n">next_offset</span><span class="p">,</span> <span class="n">user_ids</span> <span class="o">=</span> <span class="n">_get_updates</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">offset</span><span class="p">)</span>
-            <span class="n">offset</span> <span class="o">=</span> <span class="nb">max</span><span class="p">((</span><span class="n">next_offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">offset</span><span class="p">))</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="n">next_offset</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">next_offset</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">offset</span>
             <span class="k">yield</span> <span class="n">user_ids</span>
     <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">StopIteration</span></div>
@@ -314,7 +328,7 @@
         <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
     <span class="p">})</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlunparse</span><span class="p">((</span><span class="n">scheme</span><span class="p">,</span> <span class="n">netloc</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_parse_resp</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">_make_query</span><span class="p">(</span><span class="n">kv</span><span class="p">):</span>
@@ -329,9 +343,7 @@
     <span class="sd">&#39;&#39;&#39; Parses a urllib response</span>
 
 <span class="sd">    TODO: return a list of userids &#39;&#39;&#39;</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="n">l</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">body</span> <span class="p">])</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
     <span class="k">assert</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;ok&#39;</span><span class="p">]</span>
     <span class="n">updates</span> <span class="o">=</span> <span class="n">body</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">_parse_updates</span><span class="p">(</span><span class="n">updates</span><span class="p">)</span>
@@ -384,9 +396,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">url</span> <span class="o">=</span> <span class="n">weather_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="o">=</span><span class="s1">&#39;datetime&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">_strftime_now</span><span class="p">())</span>
-    <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">])</span>
     <span class="n">readings</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;readings&#39;</span><span class="p">]</span>
     <span class="n">temperatures</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">],</span> <span class="n">readings</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">temperatures</span><span class="p">)</span></div>
