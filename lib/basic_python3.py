@@ -4,12 +4,20 @@
 goal is to use only the standard library, to avoid complications of package
 installations.
 
-More information at http://github.com/ningyuansg/basic-python3
+To enable debug messages for HTTP requests, add the following lines to the top
+of your program, then call any of the NEA or Telegram API functions.
 
-All helper functions are defined in this one file for ease of import.
+.. code-block:: python
+    :linenos:
+
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+
 """
 
-import json, random, time, urllib.parse, urllib.request
+import copy, json, logging, random, time, urllib.parse, urllib.request
+
+logger = logging.getLogger('basic_python3')
 
 '''
 GENERAL
@@ -40,6 +48,13 @@ def mean(seq):
         isinstance(x, int) or isinstance(x, float) for x in seq
     ]), 'The elements of the list must be a number'
     return sum(seq) / len(seq)
+
+def _urlopen(url):
+    logger.info('Sending request to {}'.format(url))
+    response = urllib.request.urlopen(url)
+    body = response.read().decode()
+    logger.debug('Received response: {}'.format(body))
+    return {'body': body, 'status': response.status}
 
 '''
 TELEGRAM API
@@ -72,9 +87,8 @@ def telegram_whoami(key):
 
     assert type(key) == str, 'The argument must be of type str'
     url = telegram_url.format(key=key, method='getMe')
-    resp = urllib.request.urlopen(url)
-    body = resp.readline().decode()
-    result = json.loads(body)['result']
+    resp = _urlopen(url)
+    result = json.loads(resp['body'])['result']
     return [result['first_name'], result['username']]
 
 def telegram_send(key, chat_id, text):
@@ -112,7 +126,7 @@ def telegram_send(key, chat_id, text):
     url = '{base}?chat_id={chat_id}&text={text}&parse_mode=Markdown'.format(
         base=url, chat_id=chat_id, text=urllib.parse.quote(text)
     )
-    return urllib.request.urlopen(url).status == 200
+    return _urlopen(url)['status'] == 200
 
 def telegram_get_updates(key, interval=5):
     """Get a stream of user ids of new telegram updates.
@@ -155,7 +169,7 @@ def telegram_get_updates(key, interval=5):
         while True:
             time.sleep(interval)
             next_offset, user_ids = _get_updates(key, offset)
-            offset = max((next_offset + 1, offset))
+            offset = next_offset + 1 if next_offset != 0 else offset
             yield user_ids
     except KeyboardInterrupt:
         raise StopIteration
@@ -167,7 +181,7 @@ def _get_updates(key, offset):
         'offset': str(offset)
     })
     url = urllib.parse.urlunparse((scheme, netloc, path, '', query, ''))
-    resp = urllib.request.urlopen(url)
+    resp = _urlopen(url)
     return _parse_resp(resp)
 
 def _make_query(kv):
@@ -182,9 +196,7 @@ def _parse_resp(resp):
     ''' Parses a urllib response
 
     TODO: return a list of userids '''
-    body = resp.readlines()
-    body = ''.join([ l.decode() for l in body ])
-    body = json.loads(body)
+    body = json.loads(resp['body'])
     assert body['ok']
     updates = body['result']
     return _parse_updates(updates)
@@ -237,9 +249,8 @@ def weather_get_now():
     """
 
     url = weather_url.format(param='datetime', time=_strftime_now())
-    resp = urllib.request.urlopen(url)
-    body = resp.readline().decode()
-    result = json.loads(body)
+    resp = _urlopen(url)
+    result = json.loads(resp['body'])
     readings = result['items'][0]['readings']
     temperatures = map(lambda x: x['value'], readings)
     return list(temperatures)
