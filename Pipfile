@@ -4,6 +4,7 @@ name = "pypi"
 url = "https://pypi.org/simple"
 
 [scripts]
+build = "make html"
 cover = "coverage run --source lib -m py.test"
 report = "coverage report"
 
