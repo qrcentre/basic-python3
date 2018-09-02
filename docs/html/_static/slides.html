@@ -2,81 +2,78 @@
   <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/reveal.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/css/theme/blood.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/lib/js/head.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/js/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/markdown.min.js"></script>
   </head>
   <body>
     <div class="reveal">
       <div class="slides">
 
-        <section>
-          <h2>Basic Programs with Python 3</h2>
-          <p>QRC Programming Week</p>
+        <section data-markdown>
+          <textarea data-template>
+            ## Basic Programs with Python3
+
+            QRC Programming Week
+          </textarea>
         </section>
 
-        <section>
-          <h3>Disclaimer</h3>
-          <ul>
-            <li>Quite brief</li>
-            <li>Technically incorrect</li>
-            <li>Insufficient</li>
-          </ul>
-        </section>
+        <section data-markdown>
+          <textarea data-template>
+            ### Everything Set Up?
 
-        <section>
-          <h3>Setup?</h3>
-          <!-- TODO: use an image instead -->
-          <pre>
+            ```
             Python 3.5.3 (default, Jan 19 2017, 14:11:04) 
             [GCC 6.3.0 20170118] on linux
             Type "help", "copyright", "credits" or
             "license" for more information.
             &gt;&gt;&gt;
-          </pre>
-          <ul>
-            <li>Not a requiremnet</li>
-            <li>But pretty boring otherwise</li>
-          </ul>
+            ```
+          </textarea>
         </section>
 
-        <section>
-          <h3>Companion Site</h3>
-          <p><a href="http://ningyuan.io/basic-python3">ningyuan.io/basic-python3</a></p>
-          <!-- TODO: preview image of website -->
+        <section data-markdown>
+          <textarea data-template>
+            ### Companion Site
+
+            [qrcentre.github.io/basic-python3](https://qrcentre.github.io/basic-python3/)
+          </textarea>
         </section>
 
-        <section>
-          <section>
-            <h3>Overview</h3>
-          </section>
-          <section>
-            <h4>Part 1</h4>
-            <p>Calculate the average of a pre-prepared set of air temperature readings.</p>
-          </section>
+        <section data-markdown>
+          <textarea data-template>
+            ### Overview
 
-          <section>
-            <h4>Part 2</h4>
-            <p>Find the average air temperature using <strong>real-time</strong>
-            air temperature data from NEA.</p>
-          </section>
+            <div align="left">
+            **Part 1:**  
+            Calculate the average of a pre-prepared set of air temperature
+            readings.
 
-          <section>
-            <h4>Part 3</h4>
-            <p>Make a telegram bot that will send you <strong>real-time</strong>
-            air temperature data from NEA on demand.</p>
-          </section>
+            **Part 2:**  
+            Find the average air temperature using **real-time** air temperature
+            data from NEA.
+
+            **Part 3:**  
+            Make a telegram bot that will send you **real-time** air temperature
+            data from NEA on demand.
+            </span>
+          </textarea>
         </section>
 
-        <section>
-          <h3>Programming?</h3>
-        </section>
-
-        <section>
-          <h3>Programming Language?</h3>
-        </section>
       </div>
     </div>
     <script>
+      const MARKED_CDN =
+        'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/marked.js'
+      const MARKDOWN_CDN =
+        'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.6.0/plugin/markdown/markdown.min.js'
+
       Reveal.initialize({
+        dependencies: [
+          { src: MARKED_CDN, condition: () => document.querySelector('[data-markdown]') },
+          { src: MARKDOWN_CDN, condition: () => document.querySelector('[data-markdown]') }
+        ],
         history: true
       });
     </script>
