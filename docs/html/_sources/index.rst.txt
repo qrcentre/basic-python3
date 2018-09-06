@@ -15,4 +15,5 @@ This is a work in progress.
    introduction
    workshop/reference
    docs
+   facilitators_reference
    Slides <_static/slides.html#://>

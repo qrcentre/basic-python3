@@ -1,4 +1,4 @@
-#! /usr/bin/env
+#! /usr/bin/env python3
 
 """These are helper functions for the Basic Programs with Python3 workshop. The
 goal is to use only the standard library, to avoid complications of package
@@ -15,7 +15,7 @@ of your program, then call any of the NEA or Telegram API functions.
 
 """
 
-import copy, json, logging, random, time, urllib.parse, urllib.request
+import json, logging, random, time, urllib.parse, urllib.request
 
 logger = logging.getLogger('basic_python3')
 
@@ -126,7 +126,7 @@ def telegram_send(key, chat_id, text):
     )
     return _urlopen(url)['status'] == 200
 
-def telegram_get_updates(key, interval=5):
+def telegram_get_updates(key, interval=2):
     """Get a stream of user ids of new telegram updates.
 
     Only considers updates with a message key in it's JSON response.
@@ -162,12 +162,12 @@ def telegram_get_updates(key, interval=5):
     """
 
     assert type(key) == str, 'The argument must be of type str'
-    offset = 0
+    offset = None
     try:
         while True:
             time.sleep(interval)
             next_offset, user_ids = _get_updates(key, offset)
-            offset = next_offset + 1 if next_offset != 0 else offset
+            offset = next_offset + 1 if next_offset is not None else offset
             yield user_ids
     except KeyboardInterrupt:
         raise StopIteration
@@ -177,7 +177,7 @@ def _get_updates(key, offset):
     scheme, netloc, path, _, _, _ = urllib.parse.urlparse(url)
     query = _make_query({
         'offset': str(offset)
-    })
+    } if offset is not None else {})
     url = urllib.parse.urlunparse((scheme, netloc, path, '', query, ''))
     resp = _urlopen(url)
     return _parse_resp(resp)
@@ -212,7 +212,7 @@ def _parse_updates(updates):
     updates = _filter_only_messages(updates)
 
     update_ids = list(map(lambda update: update['update_id'], updates))
-    max_update_id = max(update_ids) if update_ids != [] else 0
+    max_update_id = max(update_ids) if update_ids != [] else None
 
     user_ids = map(lambda update: update['message']['from']['id'], updates)
     unique_user_ids = list(set(user_ids))
