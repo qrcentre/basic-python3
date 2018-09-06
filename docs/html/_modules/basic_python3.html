@@ -241,8 +241,6 @@
 <div class="viewcode-block" id="telegram_send"><a class="viewcode-back" href="../docs.html#basic_python3.telegram_send">[docs]</a><span class="k">def</span> <span class="nf">telegram_send</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;POST telegram method sendMessage to send a message.</span>
 
-<span class="sd">    parse_mode is set to telegram&#39;s Markdown: *bold*, _italics_, `inline code`</span>
-
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    key : string</span>
@@ -270,7 +268,7 @@
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">chat_id</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type int (number)&#39;</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">,</span> <span class="s1">&#39;The argument must be of type str&#39;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">telegram_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;sendMessage&#39;</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">?chat_id=</span><span class="si">{chat_id}</span><span class="s1">&amp;text=</span><span class="si">{text}</span><span class="s1">&amp;parse_mode=Markdown&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{base}</span><span class="s1">?chat_id=</span><span class="si">{chat_id}</span><span class="s1">&amp;text=</span><span class="si">{text}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">base</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">chat_id</span><span class="o">=</span><span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">_urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">200</span></div>
