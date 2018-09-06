@@ -94,8 +94,6 @@ def telegram_whoami(key):
 def telegram_send(key, chat_id, text):
     r"""POST telegram method sendMessage to send a message.
 
-    parse_mode is set to telegram's Markdown: *bold*, _italics_, `inline code`
-
     Parameters
     ----------
     key : string
@@ -123,7 +121,7 @@ def telegram_send(key, chat_id, text):
     assert type(chat_id) == int, 'The argument must be of type int (number)'
     assert type(text) == str, 'The argument must be of type str'
     url = telegram_url.format(key=key, method='sendMessage')
-    url = '{base}?chat_id={chat_id}&text={text}&parse_mode=Markdown'.format(
+    url = '{base}?chat_id={chat_id}&text={text}'.format(
         base=url, chat_id=chat_id, text=urllib.parse.quote(text)
     )
     return _urlopen(url)['status'] == 200
