@@ -23,7 +23,7 @@ print(temp_avg)
 
 # Is it hot or is it cold?.
 
-if temp_avg > 27:
+if temp_avg > 30:
     print("It's pretty warm tonight")
 else:
     print("naise")
